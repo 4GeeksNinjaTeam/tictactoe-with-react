@@ -4,7 +4,10 @@ import React, { useState, useEffect } from "react";
 export function Home() {
 	//evento tablero
 	let [game, setGame] = useState(["", "", "", "", "", "", "", "", ""]); //estos espacios
-	const button = () => setGame(["", "", "", "", "", "", "", "", ""]);
+	const button = () => {
+		setTurnoActual("It's X turn");
+		setGame(["", "", "", "", "", "", "", "", ""]);
+	};
 
 	//evento turno
 	const [turnoActual, setTurnoActual] = useState("It's X turn");
@@ -17,19 +20,54 @@ export function Home() {
 	};
 	//funcion resultados
 
+
+    /*
 	let resultado = () => {
 		let r1 = [game[0], game[1], game[2]];
 		let flagX = false;
 		let flagO = false;
 		for (let i = 0; i < r1.length; i++) {
-			if (r1[i] == "X") flagX = true;
-			else flagX = false;
-			if (r1[i] == "O") flagO = true;
-			else flagO = false;
+			if (r1[i] == "X") {
+				flagX = true;
+			} else {
+				flagX = false;
+				if (r1[i] == "O") flagO = true;
+				else flagO = false;
+			}
 		}
-		if (flagO) setTurnoActual("O won the game");
-		if (flagX) setTurnoActual("X won the game");
+		if (flagO) {
+			setTurnoActual("O won the game");
+			//button();
+		}
+		if (flagX) {
+			setTurnoActual("X won the game");
+		}
 	};
+*/
+	
+    function calculateWinner(squares) {
+  const lines = [
+    //winner rows
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    // winner columns
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    //winner diagonals
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+  for (let i = 0; i < lines.length; i++) {
+    const [a, b, c] = lines[i];
+    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+      return squares[a];
+    }
+  }
+  return null;
+}
+*/
 
 	useEffect(resultado, [game]);
 	const verificarTurno = e => {
